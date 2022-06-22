@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <title>FLASK PREDICTION</title>
+</head>
+<body>
+<h1><center>CRICKET SCORE PREDICTION</center></h1>
+    
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-4 first">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <!-- <div class="carousel-item active">
+                    <img src="{{ url_for('static', filename='CSK.png') }}" class="d-block w-100 h-50" alt="CSK">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='rcb.png') }}" class="d-block w-100 h-50" alt="RCB">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='mi.jpg') }}" class="d-block w-100 h-50" alt="mi">
+                  </div> -->
+                  <div class="carousel-item active">
+                    <img src="{{ url_for('static', filename='mavericks.PNG') }}" class="d-block w-100 h-50" alt="mavericks">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='NJwarriorscc.png') }}" class="d-block w-100 h-50" alt="NJwarriorscc">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='mccjr.jpg') }}" class="d-block w-100 h-50" alt="mccjr">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='stjoseph.jpg') }}" class="d-block w-100 h-50" alt="stjoseph">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='wolverines.png') }}" class="d-block w-100 h-50" alt="wolverines">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='southgujratlions.jpg') }}" class="d-block w-100 h-50" alt="southgujaratlions">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='sayrevillegladiators.jpg') }}" class="d-block w-100 h-50" alt="sayrevillegegladiators">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='picatawaycc.jpg') }}" class="d-block w-100 h-50" alt="picatawaycc">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </button>
+              </div>
+            </div>
+              
+                  
+            <div class="col-md-4 second">
+                <form class="needs-validation" action=" {{url_for('predict')}}" method="POST" novalidate>
+                    <div class="form-group" >
+                        <select class="form-control" id="exampleFormControlSelect1" name="batting-team" required>
+                         <option value="">BATTING TEAM</option>
+                         <option value="ACCENTURE">ACCENTURE</option>
+                         <option value="ROYAL ENFIELD">ROYAL ENFIELD</option>
+                          
+                        </select>
+                        <div class="invalid-feedback">
+                          Please select a valid Team.
+                        </div>
+
+                      </div>
+        
+                      <div class="form-group">
+                        
+                        <select class="form-control" name="bowling-team" id="exampleFormControlSelect1" required>
+                          <option value="">BOWLING TEAM</option>
+                         <option value="ACCENTURE">ACCENTURE</option>
+                         <option value="ROYAL ENFIELD">ROYAL ENFIELD</option>
+                          
+                        </select>
+                        <div class="invalid-feedback">
+                          Please select a valid Team.
+                        </div>
+                      </div>
+        
+                      <div class="mb-3">
+                        <input class="form-control" type="text" name ="overs" placeholder="Overs (>= 5.0) eg. 7.2" required>
+                        <div class="invalid-feedback">
+                          Please provide a valid Overs.
+                        </div>
+                      </div>
+        
+                      <!-- <div class="mb-3">
+                        <input class="form-control" type="text" name="runs" placeholder="Runs eg. 64">
+                      </div> -->
+        
+                      <div class="mb-3">
+                        <input class="form-control" type="text" name ="wickets" placeholder="Wickets eg. 4" required>
+                        <div class="invalid-feedback">
+                          Please provide a valid numbers of Wickets.
+                        </div>
+                      </div>
+        
+                      <div class="mb-3">
+                        <input class="form-control" type="text" name ="runs_in_prev_5" placeholder="Runs scored in previous 5 Overs eg. 42" required>
+                        <div class="invalid-feedback">
+                          Please provide correct numbers.
+                        </div>
+                      </div>
+        
+                     <div class="mb-3">
+                        <input class="form-control" type="text" name ="wickets_in_prev_5" placeholder="Wickets taken in previous 5 Overs eg. 3" required>
+                        <div class="invalid-feedback">
+                          Please provide correct numbers.
+                        </div>
+                     </div>
+        
+                     <div class="mb-3">
+                      <input class="btn btn-primary" type="submit" value="PREDICT">
+                     </div>
+        
+                  </form>
+                  
+            </div>
+    
+            <div class="col-md-4 third">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                      <!-- <div class="carousel-item active">
+                        <img src="{{ url_for('static', filename='mi.jpg') }}" class="d-block w-100" alt="mi">
+                        
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='CSK.png') }}" class="d-block w-100" alt="CSK">
+                        
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='rcb.png') }}" class="d-block w-100" alt="RCB">
+                      </div> -->
+
+                      <div class="carousel-item active">
+                        <img src="{{ url_for('static', filename='NJwarriorscc.png') }}" class="d-block w-100 h-50" alt="NJwarriorscc">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='sayrevillegladiators.jpg') }}" class="d-block w-100 h-50" alt="sayrevillegegladiators">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='picatawaycc.jpg') }}" class="d-block w-100 h-50" alt="picatawaycc">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='mavericks.PNG') }}" class="d-block w-100 h-50" alt="mavericks">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='mccjr.jpg') }}" class="d-block w-100 h-50" alt="mccjr">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='stjoseph.jpg') }}" class="d-block w-100 h-50" alt="stjoseph">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='wolverines.png') }}" class="d-block w-100 h-50" alt="wolverines">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='southgujratlions.jpg') }}" class="d-block w-100 h-50" alt="southgujaratlions">
+                      </div>
+                      
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </button>
+                  </div>
+                </div>
+    
+    
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+
+
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+</script>
+
+
+</body>
+</html>

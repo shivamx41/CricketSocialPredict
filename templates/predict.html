@@ -9,7 +9,7 @@
 
     <title>OUTPUT</title>
 </head>
-<body>
+<body style="background-color:powderblue;">
     	<!-- Result -->
 			<!-- <div>
 				<p>The final predicted score (range): {{ lower_limit }} to {{ upper_limit }}</p>
@@ -17,13 +17,14 @@
           <div class="container">
               <div class="row">
                   <div class="col">
-                    <div class="card">
+                    <div class="card mb-3">
                         <h5 class="card-header"><center>CRICKET SOCIAL</center></h5>
                         <div class="card-body">
                           <h5 class="card-title">Cricket Score Prediction</h5>
                           <!-- <p class="card-text">The final predicted score (range): {{ lower_limit }} to {{ upper_limit }}</p> -->
                           <p class="card-text">The final predicted score : {{ limit }}</p>
                           <p class="card-text">CRR : {{ rr }}</p>
+                          <p class="card-text" style="color: red ;">TOTAL BALLs :{{ball_count}}</p>
 
                           <a href="/" class="btn btn-primary">Go Home</a>
                         </div>

@@ -1,7 +1,7 @@
 from flask import Flask,render_template, request 
 import pickle
 import numpy as np
-
+import pandas as pd
 
 filename = 'predictionFinal.pkl'
 regressor = pickle.load(open(filename, 'rb'))
@@ -19,6 +19,13 @@ app = Flask(__name__)
 @app.route('/')
 def Index():
     return render_template("index.html")
+
+@app.route('/explore')
+def explore():
+    data = pd.read_csv('chart.csv')
+    howout = data['howout']
+    print(howout[0])
+    return render_template("explore.html",howout=howout)
 
 @app.route('/predict', methods=['POST'])
 def predict():

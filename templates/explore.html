@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" 
+    integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <title>DASH BOARD</title>
+</head>
+<body>
+    <h1>DASHBOARD</h1>
+    <p class="card-text">CRR : {{ howout }}</p>
+    <canvas id="piechart" width="900" height="400"></canvas>
+    <script>
+        const ctx = document.getElementById("piechart")
+        var piechart = new Chart(ctx,{
+            type:"pie",
+            data:{
+                lables:[
+                    'notout',
+                    'Catch',
+                    'Bowled',
+                    'RunOut',
+                    'LBW',
+                    'Stumped' 
+                ],
+                datasets:[{
+                    labels:'OVERALL MATCH',
+                    data: howout[0] ,
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)',
+                        'rgb(205, 205, 86)',
+                        'rgb(255, 235, 186)',
+                        'rgb(205, 205, 96)'
+                        ],
+                    hoverOffset: 4
+                }]
+            }
+            // options:{
+            //     responsice : false
+            // }
+        })
+    </script>
+</body>
+</html>
